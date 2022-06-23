@@ -1,17 +1,28 @@
 import * as React from "react"
 import "./AddTransaction.css"
 
-export default function AddTransaction() {
+export default function AddTransaction({isCreating,setIsCreating,form,setForm,handleOnSubmit}) {
+  const handleOnFormFieldChange = (event) => {
+    // updates individual fields in the form using the `name` and `value` properties on `event.target`. 
+    const {name, value} = event.target
+    setForm({...form, [name]: value}) 
+    // spread operators
+  }
   return (
     <div className="add-transaction">
       <h2>Add Transaction</h2>
 
-      <AddTransactionForm />
+      <AddTransactionForm 
+        handleOnFormFieldChange={handleOnFormFieldChange} 
+        handleOnSubmit={handleOnSubmit} 
+        form={form}
+        isCreating={isCreating}
+      />
     </div>
   )
 }
 
-export function AddTransactionForm() {
+export function AddTransactionForm({handleOnFormFieldChange,handleOnSubmit,form,isCreating}) {
   return (
     <div className="form">
       <div className="fields">
